@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true)
   const [activities, setActivities] = useState({})
 
   //Strava cred
@@ -13,7 +12,7 @@ function App() {
   const refreshToken = process.env.REACT_APP_REFRESHTOKEN;
   const callRefresh = `https://www.strava.com/oauth/token?client_id=${clientID}&client_secret=${clientSecret}&refresh_token=${refreshToken}&grant_type=refresh_token`
   
-  const callActivities = `https://www.strava.com/api/v3/athlete/activities?per_page=200&page=1&access_token=`
+  const callActivities = `https://www.strava.com/api/v3/athlete/activities?per_page=100&page=1&access_token=`
 
   
   useEffect(() => {
@@ -27,13 +26,11 @@ function App() {
   function getActivities(access){
       fetch(callActivities + access)
       .then(res => res.json())
-      .then(data => setActivities(data), setIsLoading(prev => !prev))
+      .then(data => setActivities(data))
       .catch(e => console.log(e))
   }
 
   const showActivities = () => {
-    if(isLoading) return <>Loading from Strava.. hang in there</>
-    if(!isLoading) {
       const activities_array = Object.entries(activities)
 
       const values = activities_array.map(a => {return a[1]})
@@ -53,7 +50,6 @@ function App() {
       <div>Total kilometers: {kayakingMeters/1000}</div>
       <div>Total meters: {kayakingMeters}</div> 
       </div>)
-    }
   }
 
   return (

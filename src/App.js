@@ -9,14 +9,6 @@ import boats from "./img/kayaking4.jpg";
 function App() {
   const [activities, setActivities] = useState({});
 
-  //Strava cred
-  let clientID = process.env.REACT_APP_CLIENT_ID;
-  let clientSecret = process.env.REACT_APP_CLIENT_SECRET;
-
-  const refreshToken = process.env.REACT_APP_REFRESHTOKEN;
-  const callRefresh = `https://www.strava.com/oauth/token?client_id=${clientID}&client_secret=${clientSecret}&refresh_token=${refreshToken}&grant_type=refresh_token`;
-
-  const callActivities = `https://www.strava.com/api/v3/athlete/activities?per_page=100&page=1&access_token=`;
 
   const layout = [
     { i: "left", x: 0, y: 0, w: 4, h: 12 },
@@ -32,19 +24,18 @@ function App() {
   ];
 
   useEffect(() => {
-    fetch(callRefresh, {
-      method: "POST",
+    fetch('http://localhost:8080/data',{
+        method: 'GET',
+        header: {
+            'Content-Type': 'application/json'
+        },
     })
-      .then((res) => res.json())
-      .then((result) => getActivities(result.access_token));
-  }, [callRefresh]);
-
-  function getActivities(access) {
-    fetch(callActivities + access)
       .then((res) => res.json())
       .then((data) => setActivities(data))
       .catch((e) => console.log(e));
-  }
+      //.then((res) => getActivities(res.access_token));
+  }, []);
+
 
   const showActivities = () => {
     const activities_array = Object.entries(activities);
@@ -56,8 +47,6 @@ function App() {
     let kayaktravels = values.filter((a) => {
       return a.type === "Kayaking";
     });
-
-    console.log(kayaktravels);
 
     let kayakingMeters = 0;
     kayaktravels.map(

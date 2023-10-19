@@ -33,7 +33,6 @@ function App() {
       .then((res) => res.json())
       .then((data) => setActivities(data))
       .catch((e) => console.log(e));
-      //.then((res) => getActivities(res.access_token));
   }, []);
 
 

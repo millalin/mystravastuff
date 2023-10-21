@@ -4,7 +4,10 @@ const axios = require("axios");
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+    origin: process.env.ALLOW_ORIGIN
+}));
 
 app.use("/data", (req, res) => {
   const callActivities = `https://www.strava.com/api/v3/athlete/activities?per_page=100&page=1`;
@@ -39,4 +42,4 @@ async function getAccessToken() {
   return res.data;
 }
 
-app.listen(8080, () => console.log("API is running on localhost:8080/data "));
+app.listen(8080, () => console.log("API is running"));

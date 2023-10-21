@@ -24,7 +24,7 @@ function App() {
   ];
 
   useEffect(() => {
-    fetch('http://localhost:8080/data',{
+    fetch(process.env.REACT_APP_SERVER,{
         method: 'GET',
         header: {
             'Content-Type': 'application/json'

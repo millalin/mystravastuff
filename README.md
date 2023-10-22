@@ -1,3 +1,11 @@
+# Showing some kayaking stats
+
+My kayaking trips statistics from 06/2023 gotten from Strava API.
+
+App deployed to:
+https://my-strava-stuff.onrender.com/
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

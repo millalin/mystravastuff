@@ -1,6 +1,7 @@
 # Showing some kayaking stats
 
-My kayaking trips statistics from 06/2023 gotten from Strava API.
+My kayaking trips statistics from 06/2023 forward.
+Data from Strava API. 
 
 App deployed to:
 https://my-strava-stuff.onrender.com/
